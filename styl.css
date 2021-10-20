@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+
+document {
+    font-family: "Gloria Hallelujah", sans-serif;
+}
+
+.podglad-1 {
+    display: none;
+}
+
+.podglad-2 {
+    width: 600px;
+    height: 395px;
+    padding: 50px;
+}
+
+.kreator-1 {
+    width: 600px;
+    height: 395px;
+    padding: 50px;
+}
+
+.kreator-2 {
+    display: none;
+}
+
+.podglad-2, .kreator-1 {
+    padding-left: 80px;
+    margin: auto;
+    background-image: url("obr/scroll.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-family: "Gloria Hallelujah", sans-serif;
+    font-size: 20px;
+}
+
+.podglad-2 input, .kreator-1 input, .podglad-2 select, .kreator-1 select {
+    background-color: transparent;
+    font-family: "Gloria Hallelujah", sans-serif;
+    font-size: 20px;
+    border: 0px;
+    border-bottom: 3px solid brown;
+    width: 250px;
+}
+
+#stworz {
+    background-image: url("obr/button.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 180px;
+    height: 120px;
+    color: white;
+    border: 0px;
+}
+
+body {
+    background-image: url("obr/tlo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#title{
+
+    text-align: center;
+}
+
+#portret, #portret-podglad {
+    border: 2px solid gray;
+    height: 170px;
+    width: 110px;
+    float: right;
+}
+
+#podglad > * td {
+    padding-right: 5px;
+}
+
+.plusik {
+    background-image: url("obr/button-small.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 0px;
+    background-color: transparent;
+    display: inline;
+}
+
+.plusik-niewidoczny {
+    display: none;
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl">
+<!---
+- dopisać więcej klas, z portretami
+- zrobić stylizowany wygląd (głównie css) na grę rpg
+- ogarnąc dokładnie, jak działa kod, przeczytać o obiektowości w JS (to co dał nauczyciel)
+- poprawic wyglad pola na zdjecie i pozycjonowanie
+- wycentrowac przycisk tworzenia postaci
+-->
+<head>
+    <meta charset="UTF-8">
+    <!-- prace: nekromante,palladyn,duida,barbarzyńce,maga,zabójca,metamorpha(shapeshifter),czarnoksiężnika, szaman,priest,
+ żołnierz,łowca,farmer,kolcekcjoner,szaleniec-->
+    <link rel="stylesheet" href="styl.css">
+    <title>charakter postaci</title>
+</head>
+
+<body>
+    <div id="kreator" class="kreator-1">
+        <div id="title">
+            <h1>Kreator postaci</h1>
+        </div>
+        <img id="portret" src="obr/none.bmp">
+        <span> Imie: </span>
+        <input type="text" id="imie">
+        <br>
+        <span> Rasa: </span>
+        <select id="rasa">
+            <option value="brak"></option>
+        </select>
+        <br>
+        <span> Klasa: </span>
+        <select id="klasa">
+            <option value="brak"></option>
+        </select>
+        <br><br>
+        <input type="button" id="stworz" value="Stwórz postać" >
+        
+  
+    </div>
+    <div id="podglad" class="podglad-1">
+        <img id="portret-podglad" src="obr/none.bmp">
+        Imie: <span id="imie-podglad"></span><br>
+        Rasa: <span id="rasa-podglad"></span><br>
+        Klasa: <span id="klasa-podglad"></span> &nbsp; &nbsp; &nbsp; &nbsp; Poziom: <span id="poziom-podglad"></span> <br>
+        Punkty nauki: <span id="pkt-nauki-podglad"></span><br>
+        <table>
+            <tr>
+                <td> Siła: </td>
+                <td id="sil-podglad"> </td>
+                <td><button class="plusik" onclick="dodaj_stat('sil')">+</button></td>
+            </tr>
+            <tr>
+                <td> Zręczność: </td>
+                <td id="zre-podglad"> </td>
+                <td><button class="plusik" onclick="dodaj_stat('zre')">+</button> </td>
+            </tr>
+            <tr>
+                <td> Inteligencja: </td>
+                <td id="int-podglad"> </td>
+                <td> <button class="plusik" onclick="dodaj_stat('int')">+</button></td>
+            </tr>
+            <tr>
+                <td> Charyzma: </td>
+                <td id="cha-podglad"> </td>
+                <td> <button class="plusik" onclick="dodaj_stat('cha')">+</button> </td>
+            </tr>
+            <tr>
+                <td> Wytrzymałość: </td>
+                <td id="wyt-podglad"> </td>
+                <td> <button class="plusik" onclick="dodaj_stat('wyt')">+</button> </td>
+            </tr>
+
+
+        </table>
+
+
+        <button onclick="postac.levelup()"> Leveluj dla testu </button>
+
+    </div>
+
+    
+    <script type="text/javascript">
+        class Postac {
+            constructor(imie, rasa, klasa) {
+                this.imie = imie;
+                this.portret = rasa.portret;
+                this.poziom = 1;
+                this.nazwarasy = rasa.nazwa;
+                this.nazwaklasy = klasa.nazwa;
+                this.sil = rasa.sil + klasa.sil;
+                this.zre = rasa.zre + klasa.zre;
+                this.int = rasa.int + klasa.int;
+                this.cha = rasa.cha + klasa.cha;
+                this.wyt = rasa.wyt + klasa.wyt;
+                this.pkt_nauki = 10;
+            }     
+            
+            levelup() {
+                this.poziom++;
+                this.pkt_nauki += 5;
+                let plusiki = document.getElementsByClassName("plusik");
+                document.getElementById("poziom-podglad").innerHTML = postac.poziom;
+                document.getElementById("pkt-nauki-podglad").innerHTML = postac.pkt_nauki;
+                for(var i=0; i<plusiki.length; i++) {
+                    plusiki[i].className = "plusik";
+                }
+            }
+        }
+
+        class Rasa {
+            constructor(nazwa, portret, sil, zre, int, cha, wyt) {
+                this.nazwa = nazwa;
+                this.portret = portret;
+                this.sil = sil;
+                this.zre = zre;
+                this.int = int;
+                this.cha = cha;
+                this.wyt = wyt;
+            }
+        }
+
+        class Klasa {
+            constructor(nazwa, sil, zre, int, cha, wyt) {
+                this.nazwa = nazwa;
+                this.sil = sil;
+                this.zre = zre;
+                this.int = int;
+                this.cha = cha;
+                this.wyt = wyt;
+            }
+        }
+
+
+        lista_ras = [];
+        lista_ras.push(new Rasa("człowiek", "human.bmp", 5, 4, 8, 6, 3));
+        lista_ras.push(new Rasa("elf", "elf.bmp", 3, 7, 5, 5, 5));
+        lista_ras.push(new Rasa("krasnolud", "dwarf.bmp", 8, 3, 6, 2, 8));
+        lista_ras.push(new Rasa("ork", "orc.jpg", 10, 3, 2, 1, 9));
+        lista_ras.push(new Rasa("nizołek", "half.bmp", 8, 3, 6, 2, 8));
+        lista_ras.push(new Rasa("jaszcuroczłowiek", "lizard.jpg", 4, 7, 4, 2, 6));
+        //sil,zre,int,cha,wyt
+        lista_klas = [];
+        lista_klas.push(new Klasa("Wojownika", 3, 2, -1, 0, 4));
+        lista_klas.push(new Klasa("Mag", -2, 1, 5, 2, -1));
+        lista_klas.push(new Klasa("Nekromanta", -2, 0, 6, 1, 0));
+        lista_klas.push(new Klasa("Paladyn", 3, 1, 3, 2, 2));
+        lista_klas.push(new Klasa("Druid", 0, 3, 0, 2, 1));
+        lista_klas.push(new Klasa("Barbarzyńca", 5, 1, 0, 1, 3));
+        lista_klas.push(new Klasa("Asasyn", 1, 5, 3, 3, 0));
+        lista_klas.push(new Klasa("Metamorph", -2, 1, 5, 2, -1));
+        lista_klas.push(new Klasa("Czarnoksiężnik", -1, 1, 5, 2, -2));
+        lista_klas.push(new Klasa("Szaman", -1, 2, 3, 2, -1));
+        lista_klas.push(new Klasa("Żołnierz", 2, 2, 1, 1, 3));
+        lista_klas.push(new Klasa("Priest", -2, 1, 5, 2, -1));
+        lista_klas.push(new Klasa("Łowca", 0, 5, 2, 1, 3));
+        lista_klas.push(new Klasa("Kolekcjoner", 0, 1, 6, 4, 4));
+        lista_klas.push(new Klasa("Szaleniec", 0, 1, -2, -1, 2));
+
+        var postac;
+
+        window.onload = function() {
+            select_ras = document.getElementById("rasa");
+            select_klas = document.getElementById("klasa");
+
+            for(var i=0; i<lista_ras.length; i++) {
+                opcja = document.createElement("option");
+                opcja.value = i;
+                opcja.innerHTML = lista_ras[i].nazwa;
+                select_ras.appendChild(opcja);
+            }
+
+            for(var i=0; i<lista_klas.length; i++) {
+                opcja = document.createElement("option");
+                opcja.value = i;
+                opcja.innerHTML = lista_klas[i].nazwa;
+                select_klas.appendChild(opcja);
+            }
+        }
+
+        document.getElementById("rasa").onchange = function() {
+            portret = document.getElementById("portret");
+            rasa = document.getElementById("rasa");
+
+            if(rasa.value == "brak") {
+                portret.src = "obr/none.bmp";
+            }
+            else {
+                portret.src = "obr/" + lista_ras[rasa.value].portret;
+            }
+        }
+
+        document.getElementById("stworz").onclick = function() {
+            imie = document.getElementById("imie").value;
+            numer_rasy = document.getElementById("rasa").value;
+            numer_klasy = document.getElementById("klasa").value;
+
+            if(imie == "" || numer_rasy == "brak" || numer_klasy == "brak") {
+                alert("Podaj dane");
+            } else {
+                postac = new Postac(imie, lista_ras[numer_rasy], lista_klas[numer_klasy]);
+            }
+            
+            document.getElementById("kreator").className = "kreator-2";
+            document.getElementById("podglad").className = "podglad-2";
+
+            document.getElementById("portret-podglad").src = "obr/" + postac.portret;
+            document.getElementById("imie-podglad").innerHTML = postac.imie;
+            document.getElementById("rasa-podglad").innerHTML = postac.nazwarasy;
+            document.getElementById("klasa-podglad").innerHTML = postac.nazwaklasy;
+            document.getElementById("poziom-podglad").innerHTML = postac.poziom;
+            document.getElementById("pkt-nauki-podglad").innerHTML = postac.pkt_nauki;
+            document.getElementById("sil-podglad").innerHTML = postac.sil;
+            document.getElementById("zre-podglad").innerHTML = postac.zre;
+            document.getElementById("int-podglad").innerHTML = postac.int;
+            document.getElementById("cha-podglad").innerHTML = postac.cha;
+            document.getElementById("wyt-podglad").innerHTML = postac.wyt;
+        
+        
+        
+        }
+
+        function dodaj_stat(statystyka) {
+            if(postac.pkt_nauki > 0) {
+                postac[statystyka]++;
+                postac.pkt_nauki--;
+                document.getElementById("pkt-nauki-podglad").innerHTML = postac.pkt_nauki;
+                document.getElementById(statystyka + "-podglad").innerHTML = postac[statystyka];
+
+                if(postac.pkt_nauki == 0) {
+                    let plusiki = document.getElementsByClassName("plusik");
+                    for(var i=0; i<plusiki.length; i++) {
+                        plusiki[i].className = "plusik plusik-niewidoczny";
+                    }
+                }
+            } else {
+                alert("Nie masz już punktów nauki!");
+            }
+            
+        }
+
+    </script>
+</body>
+
+</html>

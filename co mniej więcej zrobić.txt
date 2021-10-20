@@ -1,0 +1,41 @@
+view-source:https://imaginesolo.github.io/Fantasy-Character-Creator/
+na jego podstawie zrób ( nie kopiuj)
+
+jakie prace w fantasy
+ <!-- prace: nekromante,palladyn,duida,barbarzyńce,maga,zabójca,metamorpha(shapeshifter),czarnoksiężnika, szaman,priest,
+ żołnierz,łowca,farmer,kolcekcjoner,szaleniec-->
+
+jakie rasy
+
+<div id="right_top_midsector"><br><br><br><br><br>
+   Imie: <input type="text" id="imie"><br>
+    Rasa: <select id="rasa">
+        <option value="czlowiek">czlowiek</option>
+        <option value="elf">elf</option>
+        <option value="ork">ork</option>
+        <option value="krasnolod">krasnolód</option>
+        <option value="Kobold">Kobold</option>
+        <option value="jaszuroczlowiek">jaszuroczlowiek</option>
+    </select>
+
+status
+ <div id="character_stats">
+lvl = <br>
+siła = <br>
+zręczność = <br>
+inteligencja = <br>
+charyzma = <br>
+    
+ </div>
+
+
+										TYTUŁ
+tabela1	 lvl =																tabela 2 <- w tej tabelii ma być portret
+tabela1	 siła=																	Imie:
+tabela1	 zręczność =															Rasa:czlowie wybierz
+tabela1	 inteligencja =
+tabela1  charyzma =
+
+
+potem ma się klasa wyśietić z 15 wyborami
+ 
